@@ -1,0 +1,13 @@
+[Unit]
+Description=Download Juggler file organizer
+After=graphical-session.target
+
+[Service]
+Type=simple
+WorkingDirectory=@WATCH_DIRECTORY@
+ExecStart=@EXECUTABLE@ --directory @WATCH_DIRECTORY@ --watch --quiet
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
