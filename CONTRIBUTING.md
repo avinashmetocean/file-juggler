@@ -7,14 +7,14 @@ Contributions are welcome. Please keep changes focused, portable, and safe for f
 Clone the repository and enter it:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/download-juggler.git
-cd download-juggler
+git clone https://github.com/YOUR-USERNAME/file-juggler.git
+cd file-juggler
 ```
 
 Check Bash syntax:
 
 ```bash
-bash -n download-juggler.sh
+bash -n file-juggler.sh
 bash -n install.sh
 bash -n uninstall.sh
 ```
