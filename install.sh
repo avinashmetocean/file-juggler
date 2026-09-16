@@ -11,18 +11,18 @@ if [[ -z "$DOWNLOADS_DIR" ]]; then
 fi
 
 mkdir -p -- "$BIN_DIR" "$SERVICE_DIR"
-install -m 0755 "$SOURCE_DIR/download-juggler.sh" "$BIN_DIR/download-juggler"
+install -m 0755 "$SOURCE_DIR/file-juggler.sh" "$BIN_DIR/file-juggler"
 
 sed \
-  -e "s|@EXECUTABLE@|$BIN_DIR/download-juggler|g" \
+  -e "s|@EXECUTABLE@|$BIN_DIR/file-juggler|g" \
   -e "s|@WATCH_DIRECTORY@|$DOWNLOADS_DIR|g" \
-  "$SOURCE_DIR/systemd/download-juggler.service" \
-  > "$SERVICE_DIR/download-juggler.service"
+  "$SOURCE_DIR/systemd/file-juggler.service" \
+  > "$SERVICE_DIR/file-juggler.service"
 
-printf 'Installed executable: %s\n' "$BIN_DIR/download-juggler"
-printf 'Installed service:    %s\n' "$SERVICE_DIR/download-juggler.service"
+printf 'Installed executable: %s\n' "$BIN_DIR/file-juggler"
+printf 'Installed service:    %s\n' "$SERVICE_DIR/file-juggler.service"
 printf '\nTo start automatic organization, run:\n'
 printf '  systemctl --user daemon-reload\n'
-printf '  systemctl --user enable --now download-juggler.service\n'
+printf '  systemctl --user enable --now file-juggler.service\n'
 printf '\nNote: the current script organizes its own directory. For direct Downloads use,\n'
-printf 'copy download-juggler.sh into %s and run it there.\n' "$DOWNLOADS_DIR"
+printf 'copy file-juggler.sh into %s and run it there.\n' "$DOWNLOADS_DIR"
