@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# download-juggler.sh
+# file-juggler.sh
 # A lightweight File Juggler-style organizer for Ubuntu.
 # Place this script inside your Downloads folder.
 
@@ -14,7 +14,7 @@ QUIET=0
 
 usage() {
   cat <<'EOF'
-Usage: ./download-juggler.sh [OPTIONS]
+Usage: ./file-juggler.sh [OPTIONS]
 
 Organizes files in the same folder as this script.
 
@@ -26,10 +26,10 @@ Options:
   -h, --help   Show this help message.
 
 Examples:
-  chmod +x download-juggler.sh
-  ./download-juggler.sh --dry-run
-  ./download-juggler.sh --once
-  ./download-juggler.sh --watch
+  chmod +x file-juggler.sh
+  ./file-juggler.sh --dry-run
+  ./file-juggler.sh --once
+  ./file-juggler.sh --watch
 EOF
 }
 
