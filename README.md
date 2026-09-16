@@ -53,7 +53,7 @@ sudo apt install inotify-tools
 
 ## Installation
 
-1. Download the `download-juggler.sh` script.
+1. Download the `file-juggler.sh` script.
 2. Move both the script and this README into your Downloads folder.
 3. Open a terminal and change to that folder:
 
@@ -64,7 +64,7 @@ cd ~/Downloads
 4. Make the script executable:
 
 ```bash
-chmod +x download-juggler.sh
+chmod +x file-juggler.sh
 ```
 
 The script always organizes the folder in which the script itself is located. If your Downloads directory uses a different path or localized name, placing the script inside that directory is sufficient.
@@ -74,7 +74,7 @@ The script always organizes the folder in which the script itself is located. If
 ### Display help
 
 ```bash
-./download-juggler.sh --help
+./file-juggler.sh --help
 ```
 
 ### Preview changes
@@ -82,7 +82,7 @@ The script always organizes the folder in which the script itself is located. If
 Use dry-run mode first to see where files would be moved without changing anything:
 
 ```bash
-./download-juggler.sh --dry-run
+./file-juggler.sh --dry-run
 ```
 
 Example output:
@@ -95,19 +95,19 @@ Example output:
 ### Organize existing files once
 
 ```bash
-./download-juggler.sh --once
+./file-juggler.sh --once
 ```
 
 Because one-time organization is the default mode, this also works:
 
 ```bash
-./download-juggler.sh
+./file-juggler.sh
 ```
 
 ### Watch for new downloads
 
 ```bash
-./download-juggler.sh --watch
+./file-juggler.sh --watch
 ```
 
 The script first organizes existing files and then watches for new completed downloads. Press `Ctrl+C` to stop it.
@@ -119,13 +119,13 @@ Watch mode requires `inotifywait`, which is provided by the `inotify-tools` pack
 Suppress normal status messages:
 
 ```bash
-./download-juggler.sh --once --quiet
+./file-juggler.sh --once --quiet
 ```
 
 Options can be combined:
 
 ```bash
-./download-juggler.sh --watch --quiet
+./file-juggler.sh --watch --quiet
 ```
 
 ## Command-Line Options
@@ -170,7 +170,7 @@ This helps prevent the script from moving files before a browser or download man
 Open the script in a text editor:
 
 ```bash
-nano ~/Downloads/download-juggler.sh
+nano ~/Downloads/file-juggler.sh
 ```
 
 Find the `category_for()` function. Each `case` entry maps file extensions to a destination folder.
@@ -194,7 +194,7 @@ Extension names should be written without a leading period. The script converts 
 After editing, verify the script syntax:
 
 ```bash
-bash -n ~/Downloads/download-juggler.sh
+bash -n ~/Downloads/file-juggler.sh
 ```
 
 No output means Bash found no syntax errors.
@@ -212,7 +212,7 @@ mkdir -p ~/.config/systemd/user
 ### 2. Create the service file
 
 ```bash
-nano ~/.config/systemd/user/download-juggler.service
+nano ~/.config/systemd/user/file-juggler.service
 ```
 
 Add the following content, replacing `%h/Downloads` if your Downloads directory has a different path:
@@ -224,7 +224,7 @@ After=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=%h/Downloads/download-juggler.sh --watch --quiet
+ExecStart=%h/Downloads/file-juggler.sh --watch --quiet
 Restart=on-failure
 RestartSec=5
 
@@ -236,25 +236,25 @@ WantedBy=default.target
 
 ```bash
 systemctl --user daemon-reload
-systemctl --user enable --now download-juggler.service
+systemctl --user enable --now file-juggler.service
 ```
 
 ### 4. Check its status
 
 ```bash
-systemctl --user status download-juggler.service
+systemctl --user status file-juggler.service
 ```
 
 ### 5. View recent logs
 
 ```bash
-journalctl --user -u download-juggler.service -n 50
+journalctl --user -u file-juggler.service -n 50
 ```
 
 ### 6. Stop and disable it
 
 ```bash
-systemctl --user disable --now download-juggler.service
+systemctl --user disable --now file-juggler.service
 ```
 
 If you move or rename the script after creating the service, update `ExecStart` in the service file and run `systemctl --user daemon-reload` again.
@@ -266,13 +266,13 @@ If you move or rename the script after creating the service, update `ExecStart` 
 Make the script executable:
 
 ```bash
-chmod +x ~/Downloads/download-juggler.sh
+chmod +x ~/Downloads/file-juggler.sh
 ```
 
 Alternatively, run it through Bash:
 
 ```bash
-bash ~/Downloads/download-juggler.sh --once
+bash ~/Downloads/file-juggler.sh --once
 ```
 
 ### `inotifywait` command not found
@@ -315,15 +315,15 @@ Check the following:
 Stop and disable the user service first if you enabled it:
 
 ```bash
-systemctl --user disable --now download-juggler.service
-rm -f ~/.config/systemd/user/download-juggler.service
+systemctl --user disable --now file-juggler.service
+rm -f ~/.config/systemd/user/file-juggler.service
 systemctl --user daemon-reload
 ```
 
 Remove the script and README:
 
 ```bash
-rm -f ~/Downloads/download-juggler.sh
+rm -f ~/Downloads/file-juggler.sh
 rm -f ~/Downloads/README.md
 ```
 
@@ -334,8 +334,8 @@ Removing the script does not move files back to their original locations and doe
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/download-juggler.git
-cd download-juggler
+git clone https://github.com/YOUR-USERNAME/file-juggler.git
+cd file-juggler
 ```
 
 Run the test suite:
@@ -347,9 +347,9 @@ bash tests/test.sh
 For the simplest setup, copy the organizer into Downloads:
 
 ```bash
-cp download-juggler.sh ~/Downloads/
-chmod +x ~/Downloads/download-juggler.sh
-~/Downloads/download-juggler.sh --dry-run
+cp file-juggler.sh ~/Downloads/
+chmod +x ~/Downloads/file-juggler.sh
+~/Downloads/file-juggler.sh --dry-run
 ```
 
 Replace `YOUR-USERNAME` with your GitHub username after publishing the repository.
